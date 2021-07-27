@@ -1,6 +1,7 @@
 package com.boa.customerapi.models;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,7 +26,7 @@ public class Customer {
 	@Column(name="Mobile_No")
 	private long mobileNo;
 	@Column(name="DOB")
-	@DateTimeFormat(iso = ISO.DATE)
-	private LocalDate dob;
+	@DateTimeFormat(iso = ISO.DATE_TIME)
+	private LocalDateTime dob;
 
 }
