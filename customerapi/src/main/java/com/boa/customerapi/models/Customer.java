@@ -26,7 +26,7 @@ public class Customer {
 	@Column(name="Mobile_No")
 	private long mobileNo;
 	@Column(name="DOB")
-	@DateTimeFormat(iso = ISO.DATE_TIME)
-	private LocalDateTime dob;
+	@DateTimeFormat(iso = ISO.DATE)
+	private LocalDate dob;
 
 }

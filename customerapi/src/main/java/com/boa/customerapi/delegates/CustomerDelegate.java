@@ -2,6 +2,7 @@ package com.boa.customerapi.delegates;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
@@ -18,7 +19,12 @@ public class CustomerDelegate implements JavaDelegate{
 		Customer customer=new Customer();
 		customer.setName(execution.getVariable("name").toString());
 		customer.setMobileNo(Long.parseLong(execution.getVariable("mobileNo").toString()));
-		customer.setDob((LocalDateTime) execution.getVariable("dob"));
+		DateTimeFormatter formatter=DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		String date=execution.getVariable("dob")
+				.toString().substring(0, 10);
+		System.out.println(date);
+		LocalDate localDate=LocalDate.parse(date,formatter);
+		customer.setDob(localDate);
 		System.out.println(customer.getName());
 	}
 
