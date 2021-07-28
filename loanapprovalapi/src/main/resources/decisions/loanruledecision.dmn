@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_0j01nix" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.9.0">
+  <decision id="Decision_1vdaxzp" name="Loan Rule">
+    <decisionTable id="DecisionTable_0010aad">
+      <input id="Input_1" label="Age" camunda:inputVariable="age">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0mqcvx2" label="Job" camunda:inputVariable="job">
+        <inputExpression id="LiteralExpression_1ii6wwc" typeRef="boolean">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1edtr1w" label="House" camunda:inputVariable="house">
+        <inputExpression id="LiteralExpression_0c23voh" typeRef="boolean">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_12njm2q" label="CIBIL SCORE" camunda:inputVariable="cibilScore">
+        <inputExpression id="LiteralExpression_0lnur5r" typeRef="long">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Status" name="status" typeRef="boolean" />
+      <rule id="DecisionRule_1cywqa0">
+        <inputEntry id="UnaryTests_12he9po">
+          <text>"Young"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0lpf3t8">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0fmdejp">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1tkjwbk">
+          <text>[200..400]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1218mgu">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_09tfy8y">
+        <inputEntry id="UnaryTests_1fnv04t">
+          <text>"Young"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_16wb0p0">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1p3ide9">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0htrezc">
+          <text>[500..700]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1b0xaz2">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="Decision_1vdaxzp">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
