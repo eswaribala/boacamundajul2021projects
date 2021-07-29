@@ -133,6 +133,40 @@
 		    <artifactId>lombok</artifactId>  
 		   
 		</dependency>
+		
+		 <!-- Required to use Connectors -->
+    <dependency>
+      <groupId>org.camunda.connect</groupId>
+      <artifactId>camunda-connect-connectors-all</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.camunda.bpm</groupId>
+      <artifactId>camunda-engine-plugin-connect</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Required to use Templates -->
+    <dependency>
+      <groupId>org.camunda.template-engines</groupId>
+      <artifactId>camunda-template-engines-freemarker</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.camunda.template-engines</groupId>
+      <artifactId>camunda-template-engines-velocity</artifactId>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.camunda.consulting.util</groupId>
+      <artifactId>camunda-util-demo-support</artifactId>
+      <version>0.4.3</version>
+    </dependency>
+    <dependency>
+      <groupId>com.camunda.consulting.util</groupId>
+      <artifactId>camunda-util-demo-data-generator</artifactId>
+      <version>0.5.3</version>
+    </dependency>
+    
   </dependencies>
 
   <repositories>

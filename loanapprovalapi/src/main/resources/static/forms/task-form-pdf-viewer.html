@@ -78,5 +78,27 @@ embedded:/forms/task-form-pdf-viewer.html
   </div>
 </div>
 </div>  
+<div class="container-fluid">
+<div class="row">
+  <div class="col-md-4">
+<button ng-click="accept($event)"  class="btn btn-success" >Accept</button>
+<button ng-click="reject($event)"  class="btn btn-warn">Reject</button>
+ <script cam-script type="text/form-script">
 
+       $scope.accept = function($event) {
+          $event.preventDefault();
+          $event.stopPropagation();
+          camForm.variableManager.variableValue('status','accepted');
+
+        };
+$scope.reject = function($event) {
+          $event.preventDefault();
+          $event.stopPropagation();
+          camForm.variableManager.variableValue('status','rejected');
+
+        };
+    </script>
+</div>
+</div>
+</div>
 </form>
