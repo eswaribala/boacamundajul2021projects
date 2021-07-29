@@ -6,44 +6,59 @@
     </bpmn:startEvent>
     <bpmn:sequenceFlow id="Flow_1320k44" sourceRef="StartEvent_1" targetRef="Activity_116cnlx" />
     <bpmn:endEvent id="Event_0vpyz8e">
-      <bpmn:incoming>Flow_1dpgc4k</bpmn:incoming>
+      <bpmn:incoming>Flow_1w0lm3z</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:userTask id="Activity_116cnlx" name="Upload PDF" camunda:formKey="embedded:/forms/task-form-pdf-upload.html">
       <bpmn:incoming>Flow_1320k44</bpmn:incoming>
       <bpmn:outgoing>Flow_1xxjjda</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:sequenceFlow id="Flow_1xxjjda" sourceRef="Activity_116cnlx" targetRef="Activity_111jrv4" />
-    <bpmn:sequenceFlow id="Flow_1dpgc4k" sourceRef="Activity_111jrv4" targetRef="Event_0vpyz8e" />
     <bpmn:userTask id="Activity_111jrv4" name="Review PDF" camunda:formKey="embedded:/forms/task-form-pdf-viewer.html">
       <bpmn:incoming>Flow_1xxjjda</bpmn:incoming>
-      <bpmn:outgoing>Flow_1dpgc4k</bpmn:outgoing>
+      <bpmn:outgoing>Flow_15rdjkx</bpmn:outgoing>
     </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_15rdjkx" sourceRef="Activity_111jrv4" targetRef="Activity_15mw0pa" />
+    <bpmn:sequenceFlow id="Flow_1w0lm3z" sourceRef="Activity_15mw0pa" targetRef="Event_0vpyz8e" />
+    <bpmn:scriptTask id="Activity_15mw0pa" name="Read Status" scriptFormat="groovy">
+      <bpmn:incoming>Flow_15rdjkx</bpmn:incoming>
+      <bpmn:outgoing>Flow_1w0lm3z</bpmn:outgoing>
+      <bpmn:script>status = execution.getVariable("status");
+println "Loan approval status $status"
+      </bpmn:script>
+    </bpmn:scriptTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="uploadprocess">
-      <bpmndi:BPMNEdge id="Flow_1320k44_di" bpmnElement="Flow_1320k44">
-        <di:waypoint x="215" y="117" />
-        <di:waypoint x="350" y="117" />
+      <bpmndi:BPMNEdge id="Flow_1w0lm3z_di" bpmnElement="Flow_1w0lm3z">
+        <di:waypoint x="770" y="117" />
+        <di:waypoint x="852" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_15rdjkx_di" bpmnElement="Flow_15rdjkx">
+        <di:waypoint x="610" y="117" />
+        <di:waypoint x="670" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1xxjjda_di" bpmnElement="Flow_1xxjjda">
         <di:waypoint x="450" y="117" />
         <di:waypoint x="510" y="117" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1dpgc4k_di" bpmnElement="Flow_1dpgc4k">
-        <di:waypoint x="610" y="117" />
-        <di:waypoint x="692" y="117" />
+      <bpmndi:BPMNEdge id="Flow_1320k44_di" bpmnElement="Flow_1320k44">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="350" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="179" y="99" width="36" height="36" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0vpyz8e_di" bpmnElement="Event_0vpyz8e">
+        <dc:Bounds x="852" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0vt8hlt_di" bpmnElement="Activity_116cnlx">
         <dc:Bounds x="350" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0vpyz8e_di" bpmnElement="Event_0vpyz8e">
-        <dc:Bounds x="692" y="99" width="36" height="36" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_07jlvgq_di" bpmnElement="Activity_111jrv4">
         <dc:Bounds x="510" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0exz3jz_di" bpmnElement="Activity_15mw0pa">
+        <dc:Bounds x="670" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
