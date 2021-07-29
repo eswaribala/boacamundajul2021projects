@@ -49,16 +49,15 @@ println "Loan approval status $status"
     </bpmn:endEvent>
     <bpmn:subProcess id="Activity_0qv7b9y" triggeredByEvent="true">
       <bpmn:startEvent id="Event_12opxyj">
-        <bpmn:outgoing>Flow_0n060hy</bpmn:outgoing>
+        <bpmn:outgoing>Flow_06yu9he</bpmn:outgoing>
         <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_1mus2sq">
           <bpmn:condition xsi:type="bpmn:tFormalExpression">${status}</bpmn:condition>
         </bpmn:conditionalEventDefinition>
       </bpmn:startEvent>
-      <bpmn:sequenceFlow id="Flow_0n060hy" sourceRef="Event_12opxyj" targetRef="Activity_0ybrtzr" />
       <bpmn:sequenceFlow id="Flow_0mgqb6l" sourceRef="Activity_0ybrtzr" targetRef="Activity_0d6pqdk" />
       <bpmn:userTask id="Activity_0ybrtzr" name="Cheque Preparation" camunda:formKey="embedded:/forms/cheque-preparation.html">
-        <bpmn:incoming>Flow_0n060hy</bpmn:incoming>
         <bpmn:incoming>Flow_1jnohs1</bpmn:incoming>
+        <bpmn:incoming>Flow_0cnnkdw</bpmn:incoming>
         <bpmn:outgoing>Flow_0mgqb6l</bpmn:outgoing>
       </bpmn:userTask>
       <bpmn:sequenceFlow id="Flow_1s0md7j" sourceRef="Activity_0d6pqdk" targetRef="Activity_02p0ibv" />
@@ -81,6 +80,12 @@ println "Loan approval status $status"
         <bpmn:incoming>Flow_16n6e2y</bpmn:incoming>
       </bpmn:endEvent>
       <bpmn:sequenceFlow id="Flow_16n6e2y" sourceRef="Activity_02p0ibv" targetRef="Event_1wgf4xe" />
+      <bpmn:sequenceFlow id="Flow_06yu9he" sourceRef="Event_12opxyj" targetRef="Activity_0rryz9n" />
+      <bpmn:sequenceFlow id="Flow_0cnnkdw" sourceRef="Activity_0rryz9n" targetRef="Activity_0ybrtzr" />
+      <bpmn:serviceTask id="Activity_0rryz9n" name="Task Notifier" camunda:delegateExpression="${fundTransferTaskListener}">
+        <bpmn:incoming>Flow_06yu9he</bpmn:incoming>
+        <bpmn:outgoing>Flow_0cnnkdw</bpmn:outgoing>
+      </bpmn:serviceTask>
     </bpmn:subProcess>
     <bpmn:textAnnotation id="TextAnnotation_0vk374e">
       <bpmn:text>Read Applicant information</bpmn:text>
@@ -175,45 +180,52 @@ println "Loan approval status $status"
       <bpmndi:BPMNShape id="Activity_172ghp5_di" bpmnElement="Activity_0qv7b9y" isExpanded="true">
         <dc:Bounds x="170" y="472" width="912" height="238" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_16n6e2y_di" bpmnElement="Flow_16n6e2y">
+        <di:waypoint x="890" y="580" />
+        <di:waypoint x="942" y="580" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1jnohs1_di" bpmnElement="Flow_1jnohs1">
+        <di:waypoint x="680" y="638" />
+        <di:waypoint x="680" y="670" />
+        <di:waypoint x="500" y="670" />
+        <di:waypoint x="500" y="620" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1s0md7j_di" bpmnElement="Flow_1s0md7j">
-        <di:waypoint x="560" y="580" />
-        <di:waypoint x="700" y="580" />
+        <di:waypoint x="720" y="580" />
+        <di:waypoint x="790" y="580" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0mgqb6l_di" bpmnElement="Flow_0mgqb6l">
-        <di:waypoint x="400" y="580" />
-        <di:waypoint x="460" y="580" />
+        <di:waypoint x="550" y="580" />
+        <di:waypoint x="620" y="580" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0n060hy_di" bpmnElement="Flow_0n060hy">
+      <bpmndi:BPMNEdge id="Flow_06yu9he_di" bpmnElement="Flow_06yu9he">
         <di:waypoint x="246" y="580" />
         <di:waypoint x="300" y="580" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1jnohs1_di" bpmnElement="Flow_1jnohs1">
-        <di:waypoint x="520" y="638" />
-        <di:waypoint x="520" y="670" />
-        <di:waypoint x="350" y="670" />
-        <di:waypoint x="350" y="620" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_16n6e2y_di" bpmnElement="Flow_16n6e2y">
-        <di:waypoint x="800" y="580" />
-        <di:waypoint x="942" y="580" />
+      <bpmndi:BPMNEdge id="Flow_0cnnkdw_di" bpmnElement="Flow_0cnnkdw">
+        <di:waypoint x="400" y="580" />
+        <di:waypoint x="450" y="580" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_06lyokg_di" bpmnElement="Event_12opxyj">
         <dc:Bounds x="210" y="562" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_11meqze_di" bpmnElement="Activity_0ybrtzr" bioc:stroke="#fb8c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#fb8c00">
-        <dc:Bounds x="300" y="540" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0z58oe4_di" bpmnElement="Activity_02p0ibv" bioc:stroke="#fb8c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#fb8c00">
-        <dc:Bounds x="700" y="540" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1p8zrxo_di" bpmnElement="Activity_0d6pqdk" bioc:stroke="#fb8c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#fb8c00">
-        <dc:Bounds x="460" y="540" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1wgf4xe_di" bpmnElement="Event_1wgf4xe">
         <dc:Bounds x="942" y="562" width="36" height="36" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0z58oe4_di" bpmnElement="Activity_02p0ibv" bioc:stroke="#fb8c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#fb8c00">
+        <dc:Bounds x="790" y="540" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1p8zrxo_di" bpmnElement="Activity_0d6pqdk" bioc:stroke="#fb8c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#fb8c00">
+        <dc:Bounds x="620" y="540" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_11meqze_di" bpmnElement="Activity_0ybrtzr" bioc:stroke="#fb8c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#fb8c00">
+        <dc:Bounds x="450" y="540" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_16iuf87_di" bpmnElement="Activity_0rryz9n" bioc:stroke="#fb8c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#fb8c00">
+        <dc:Bounds x="300" y="540" width="100" height="80" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0fgfqm1_di" bpmnElement="Event_1w2ph9f">
-        <dc:Bounds x="502" y="602" width="36" height="36" />
+        <dc:Bounds x="662" y="602" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_0vk374e_di" bpmnElement="TextAnnotation_0vk374e">
         <dc:Bounds x="280" y="145" width="100" height="41" />

@@ -1,4 +1,4 @@
-package com.boa.loanapprovalapi;
+package com.boa.loanapprovalapi.delegates;
 
 import java.util.logging.Logger;
 
