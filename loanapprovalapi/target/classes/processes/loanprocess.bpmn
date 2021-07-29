@@ -56,7 +56,6 @@ println "Loan approval status $status"
       </bpmn:startEvent>
       <bpmn:sequenceFlow id="Flow_0mgqb6l" sourceRef="Activity_0ybrtzr" targetRef="Activity_0d6pqdk" />
       <bpmn:userTask id="Activity_0ybrtzr" name="Cheque Preparation" camunda:formKey="embedded:/forms/cheque-preparation.html">
-        <bpmn:incoming>Flow_1jnohs1</bpmn:incoming>
         <bpmn:incoming>Flow_06yu9he</bpmn:incoming>
         <bpmn:outgoing>Flow_0mgqb6l</bpmn:outgoing>
       </bpmn:userTask>
@@ -65,22 +64,34 @@ println "Loan approval status $status"
         <bpmn:incoming>Flow_1s0md7j</bpmn:incoming>
         <bpmn:outgoing>Flow_16n6e2y</bpmn:outgoing>
       </bpmn:serviceTask>
-      <bpmn:boundaryEvent id="Event_1w2ph9f" attachedToRef="Activity_0d6pqdk">
-        <bpmn:outgoing>Flow_1jnohs1</bpmn:outgoing>
-        <bpmn:timerEventDefinition id="TimerEventDefinition_16lewl7">
-          <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT1M</bpmn:timeDuration>
-        </bpmn:timerEventDefinition>
-      </bpmn:boundaryEvent>
       <bpmn:userTask id="Activity_0d6pqdk" name="Document Signing">
         <bpmn:incoming>Flow_0mgqb6l</bpmn:incoming>
         <bpmn:outgoing>Flow_1s0md7j</bpmn:outgoing>
       </bpmn:userTask>
-      <bpmn:sequenceFlow id="Flow_1jnohs1" sourceRef="Event_1w2ph9f" targetRef="Activity_0ybrtzr" />
       <bpmn:endEvent id="Event_1wgf4xe">
         <bpmn:incoming>Flow_16n6e2y</bpmn:incoming>
       </bpmn:endEvent>
       <bpmn:sequenceFlow id="Flow_16n6e2y" sourceRef="Activity_02p0ibv" targetRef="Event_1wgf4xe" />
       <bpmn:sequenceFlow id="Flow_06yu9he" sourceRef="Event_12opxyj" targetRef="Activity_0ybrtzr" />
+      <bpmn:endEvent id="Event_083xjc1">
+        <bpmn:incoming>Flow_00dlnub</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:boundaryEvent id="Event_1w2ph9f" cancelActivity="false" attachedToRef="Activity_0d6pqdk">
+        <bpmn:outgoing>Flow_1vwrjgv</bpmn:outgoing>
+        <bpmn:timerEventDefinition id="TimerEventDefinition_0bfeb8p">
+          <bpmn:timeCycle xsi:type="bpmn:tFormalExpression">R5/PT1M</bpmn:timeCycle>
+        </bpmn:timerEventDefinition>
+      </bpmn:boundaryEvent>
+      <bpmn:sequenceFlow id="Flow_1vwrjgv" sourceRef="Event_1w2ph9f" targetRef="Activity_08h1gif" />
+      <bpmn:userTask id="Activity_08h1gif" name="Notify User" camunda:formKey="embedded:/forms/notify-form.html">
+        <bpmn:incoming>Flow_1vwrjgv</bpmn:incoming>
+        <bpmn:outgoing>Flow_00dlnub</bpmn:outgoing>
+      </bpmn:userTask>
+      <bpmn:sequenceFlow id="Flow_00dlnub" sourceRef="Activity_08h1gif" targetRef="Event_083xjc1" />
+      <bpmn:textAnnotation id="TextAnnotation_0fbax53">
+        <bpmn:text>once in a minute repeats for 5 times</bpmn:text>
+      </bpmn:textAnnotation>
+      <bpmn:association id="Association_0n4r6vj" sourceRef="Event_1w2ph9f" targetRef="TextAnnotation_0fbax53" />
     </bpmn:subProcess>
     <bpmn:textAnnotation id="TextAnnotation_0vk374e">
       <bpmn:text>Read Applicant information</bpmn:text>
@@ -173,17 +184,15 @@ println "Loan approval status $status"
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_172ghp5_di" bpmnElement="Activity_0qv7b9y" isExpanded="true">
-        <dc:Bounds x="170" y="472" width="912" height="238" />
+        <dc:Bounds x="170" y="402" width="912" height="400" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_06yu9he_di" bpmnElement="Flow_06yu9he">
+        <di:waypoint x="278" y="580" />
+        <di:waypoint x="450" y="580" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_16n6e2y_di" bpmnElement="Flow_16n6e2y">
         <di:waypoint x="890" y="580" />
         <di:waypoint x="942" y="580" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1jnohs1_di" bpmnElement="Flow_1jnohs1">
-        <di:waypoint x="680" y="638" />
-        <di:waypoint x="680" y="670" />
-        <di:waypoint x="500" y="670" />
-        <di:waypoint x="500" y="620" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1s0md7j_di" bpmnElement="Flow_1s0md7j">
         <di:waypoint x="720" y="580" />
@@ -193,12 +202,20 @@ println "Loan approval status $status"
         <di:waypoint x="550" y="580" />
         <di:waypoint x="620" y="580" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_06yu9he_di" bpmnElement="Flow_06yu9he">
-        <di:waypoint x="278" y="580" />
-        <di:waypoint x="450" y="580" />
+      <bpmndi:BPMNEdge id="Flow_1vwrjgv_di" bpmnElement="Flow_1vwrjgv">
+        <di:waypoint x="680" y="638" />
+        <di:waypoint x="680" y="700" />
+        <di:waypoint x="750" y="700" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Event_1wgf4xe_di" bpmnElement="Event_1wgf4xe">
-        <dc:Bounds x="942" y="562" width="36" height="36" />
+      <bpmndi:BPMNEdge id="Flow_00dlnub_di" bpmnElement="Flow_00dlnub">
+        <di:waypoint x="850" y="700" />
+        <di:waypoint x="902" y="700" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_06lyokg_di" bpmnElement="Event_12opxyj">
+        <dc:Bounds x="242" y="562" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_11meqze_di" bpmnElement="Activity_0ybrtzr" bioc:stroke="#fb8c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#fb8c00">
+        <dc:Bounds x="450" y="540" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0z58oe4_di" bpmnElement="Activity_02p0ibv" bioc:stroke="#fb8c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#fb8c00">
         <dc:Bounds x="790" y="540" width="100" height="80" />
@@ -206,13 +223,23 @@ println "Loan approval status $status"
       <bpmndi:BPMNShape id="Activity_1p8zrxo_di" bpmnElement="Activity_0d6pqdk" bioc:stroke="#fb8c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#fb8c00">
         <dc:Bounds x="620" y="540" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_11meqze_di" bpmnElement="Activity_0ybrtzr" bioc:stroke="#fb8c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#fb8c00">
-        <dc:Bounds x="450" y="540" width="100" height="80" />
+      <bpmndi:BPMNShape id="Event_1wgf4xe_di" bpmnElement="Event_1wgf4xe">
+        <dc:Bounds x="942" y="562" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_06lyokg_di" bpmnElement="Event_12opxyj">
-        <dc:Bounds x="242" y="562" width="36" height="36" />
+      <bpmndi:BPMNShape id="Event_083xjc1_di" bpmnElement="Event_083xjc1">
+        <dc:Bounds x="902" y="682" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0fgfqm1_di" bpmnElement="Event_1w2ph9f">
+      <bpmndi:BPMNShape id="TextAnnotation_0fbax53_di" bpmnElement="TextAnnotation_0fbax53">
+        <dc:Bounds x="700" y="470" width="100" height="55" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0p2bell_di" bpmnElement="Activity_08h1gif">
+        <dc:Bounds x="750" y="660" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0n4r6vj_di" bpmnElement="Association_0n4r6vj">
+        <di:waypoint x="688" y="604" />
+        <di:waypoint x="729" y="525" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_0idv9vk_di" bpmnElement="Event_1w2ph9f">
         <dc:Bounds x="662" y="602" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_0vk374e_di" bpmnElement="TextAnnotation_0vk374e">
