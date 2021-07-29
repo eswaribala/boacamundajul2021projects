@@ -51,7 +51,7 @@ println "Loan approval status $status"
       <bpmn:startEvent id="Event_12opxyj">
         <bpmn:outgoing>Flow_06yu9he</bpmn:outgoing>
         <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_1mus2sq">
-          <bpmn:condition xsi:type="bpmn:tFormalExpression">${status}</bpmn:condition>
+          <bpmn:condition xsi:type="bpmn:tFormalExpression">#{status}</bpmn:condition>
         </bpmn:conditionalEventDefinition>
       </bpmn:startEvent>
       <bpmn:sequenceFlow id="Flow_0mgqb6l" sourceRef="Activity_0ybrtzr" targetRef="Activity_0d6pqdk" />
@@ -186,6 +186,15 @@ println "Loan approval status $status"
       <bpmndi:BPMNShape id="Activity_172ghp5_di" bpmnElement="Activity_0qv7b9y" isExpanded="true">
         <dc:Bounds x="170" y="402" width="912" height="400" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_00dlnub_di" bpmnElement="Flow_00dlnub">
+        <di:waypoint x="850" y="700" />
+        <di:waypoint x="902" y="700" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1vwrjgv_di" bpmnElement="Flow_1vwrjgv">
+        <di:waypoint x="680" y="638" />
+        <di:waypoint x="680" y="700" />
+        <di:waypoint x="750" y="700" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_06yu9he_di" bpmnElement="Flow_06yu9he">
         <di:waypoint x="278" y="580" />
         <di:waypoint x="450" y="580" />
@@ -201,15 +210,6 @@ println "Loan approval status $status"
       <bpmndi:BPMNEdge id="Flow_0mgqb6l_di" bpmnElement="Flow_0mgqb6l">
         <di:waypoint x="550" y="580" />
         <di:waypoint x="620" y="580" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1vwrjgv_di" bpmnElement="Flow_1vwrjgv">
-        <di:waypoint x="680" y="638" />
-        <di:waypoint x="680" y="700" />
-        <di:waypoint x="750" y="700" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_00dlnub_di" bpmnElement="Flow_00dlnub">
-        <di:waypoint x="850" y="700" />
-        <di:waypoint x="902" y="700" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_06lyokg_di" bpmnElement="Event_12opxyj">
         <dc:Bounds x="242" y="562" width="36" height="36" />
@@ -229,19 +229,19 @@ println "Loan approval status $status"
       <bpmndi:BPMNShape id="Event_083xjc1_di" bpmnElement="Event_083xjc1">
         <dc:Bounds x="902" y="682" width="36" height="36" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0p2bell_di" bpmnElement="Activity_08h1gif">
+        <dc:Bounds x="750" y="660" width="100" height="80" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_0fbax53_di" bpmnElement="TextAnnotation_0fbax53">
         <dc:Bounds x="700" y="470" width="100" height="55" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0p2bell_di" bpmnElement="Activity_08h1gif">
-        <dc:Bounds x="750" y="660" width="100" height="80" />
+      <bpmndi:BPMNShape id="Event_0idv9vk_di" bpmnElement="Event_1w2ph9f">
+        <dc:Bounds x="662" y="602" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Association_0n4r6vj_di" bpmnElement="Association_0n4r6vj">
         <di:waypoint x="688" y="604" />
         <di:waypoint x="729" y="525" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Event_0idv9vk_di" bpmnElement="Event_1w2ph9f">
-        <dc:Bounds x="662" y="602" width="36" height="36" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_0vk374e_di" bpmnElement="TextAnnotation_0vk374e">
         <dc:Bounds x="280" y="145" width="100" height="41" />
       </bpmndi:BPMNShape>

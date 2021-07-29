@@ -21,6 +21,8 @@ public class FundTransferTaskListener implements TaskListener {
 		        + ", executionId=" + task.getId()
 		        + ", variables=" + task.getVariables()
 		        + " \n\n");
+		task.getExecution().getProcessInstance().setVariable("status", true);
+		task.setVariable("status", true);
 	}
 
 }
