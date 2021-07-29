@@ -1,0 +1,4 @@
+FROM java:8
+EXPOSE 7074
+ADD /target/loanapprovalapi.jar loanapprovalapi.jar
+ENTRYPOINT ["java","-jar","loanapprovalapi.jar"]
