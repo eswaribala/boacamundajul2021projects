@@ -68,25 +68,25 @@ public class ProcessScenarioTest {
   private ProcessScenario myProcess;
 
   @Test
-  @Deployment(resources="process.bpmn") // only required for process test coverage
+  @Deployment(resources="loanprocess.bpmn") // only required for process test coverage
   public void testHappyPath() {
     // Define scenarios by using camunda-bpm-assert-scenario:
 
-    //ExecutableRunner starter = Scenario.run(myProcess) //
-    //    .startByKey(ProcessConstants.PROCESS_DEFINITION_KEY);
+    ExecutableRunner starter = Scenario.run(myProcess) //
+        .startByKey(ProcessConstants.PROCESS_DEFINITION_KEY);
 
-    // when(myProcess.waitsAtReceiveTask(anyString())).thenReturn((messageSubscription) -> {
-    //  messageSubscription.receive();
-    // });
-    // when(myProcess.waitsAtUserTask(anyString())).thenReturn((task) -> {
-    //  task.complete();
-    // });
+    //when(myProcess.waitsAtReceiveTask(anyString())).thenReturn((messageSubscription) -> {
+      //messageSubscription.receive();
+     //});
+     //when(myProcess.waitsAtUserTask(anyString())).thenReturn((task) -> {
+      //task.complete();
+     //});
 
     // OK - everything prepared - let's go and execute the scenario
-    //Scenario scenario = starter.execute();
+    Scenario scenario = starter.execute();
 
     // now you can do some assertions   
-    //verify(myProcess).hasFinished("EndEvent");
+    verify(myProcess).hasFinished("EndEvent");
   }
 
 }
