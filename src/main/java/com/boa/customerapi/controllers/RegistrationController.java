@@ -1,5 +1,7 @@
 package com.boa.customerapi.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +34,13 @@ public class RegistrationController {
 	public void publishCustomer(@PathVariable("customerId") long customerId) {
 		
 		this.customerDataPublisher.sendMessage(customerId);
+		
+	}
+	
+	@GetMapping("/customers/fetch/{customerId}")
+	public Customer getAllCustomer(@PathVariable("customerId") long customerId) {
+		
+		return this.customerService.fetchCustomerById(customerId);
 		
 	}
 }

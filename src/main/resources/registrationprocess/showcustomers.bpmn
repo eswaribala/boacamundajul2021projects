@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1ej2ydp" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.9.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="showCustomerData" name="ShowCustomerData" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0zahmoz</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_1szn4rl">
+      <bpmn:incoming>Flow_0qfm2zz</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Activity_0sc9j8l" name="Read Data" camunda:delegateExpression="${readData}">
+      <bpmn:incoming>Flow_1cvydsi</bpmn:incoming>
+      <bpmn:outgoing>Flow_1bdxxfi</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0zahmoz" sourceRef="StartEvent_1" targetRef="Activity_1eu6llv" />
+    <bpmn:userTask id="Activity_1eu6llv" name="Customer Input" camunda:formKey="embedded:/forms/customerId-data-form.html">
+      <bpmn:incoming>Flow_0zahmoz</bpmn:incoming>
+      <bpmn:outgoing>Flow_1cvydsi</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1cvydsi" sourceRef="Activity_1eu6llv" targetRef="Activity_0sc9j8l" />
+    <bpmn:sequenceFlow id="Flow_1bdxxfi" sourceRef="Activity_0sc9j8l" targetRef="Activity_1jc9089" />
+    <bpmn:userTask id="Activity_1jc9089" name="Show Data" camunda:formKey="embedded:/forms/show-data-form.html">
+      <bpmn:incoming>Flow_1bdxxfi</bpmn:incoming>
+      <bpmn:outgoing>Flow_0qfm2zz</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0qfm2zz" sourceRef="Activity_1jc9089" targetRef="Event_1szn4rl" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="showCustomerData">
+      <bpmndi:BPMNEdge id="Flow_1cvydsi_di" bpmnElement="Flow_1cvydsi">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="440" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0zahmoz_di" bpmnElement="Flow_0zahmoz">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1bdxxfi_di" bpmnElement="Flow_1bdxxfi">
+        <di:waypoint x="540" y="117" />
+        <di:waypoint x="610" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0qfm2zz_di" bpmnElement="Flow_0qfm2zz">
+        <di:waypoint x="710" y="117" />
+        <di:waypoint x="772" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0u8n1oc_di" bpmnElement="Activity_0sc9j8l">
+        <dc:Bounds x="440" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_17ydqp8_di" bpmnElement="Activity_1eu6llv">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_178v58g_di" bpmnElement="Activity_1jc9089">
+        <dc:Bounds x="610" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1szn4rl_di" bpmnElement="Event_1szn4rl">
+        <dc:Bounds x="772" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

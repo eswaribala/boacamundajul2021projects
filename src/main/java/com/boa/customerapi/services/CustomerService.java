@@ -1,5 +1,7 @@
 package com.boa.customerapi.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,5 +15,9 @@ public class CustomerService {
 	
     public Customer saveCustomer(Customer customer) {
     	return this.customerRepository.save(customer);
+    }
+    
+    public Customer fetchCustomerById(long customerId){
+    	return this.customerRepository.findById(customerId).orElse(null);
     }
 }
