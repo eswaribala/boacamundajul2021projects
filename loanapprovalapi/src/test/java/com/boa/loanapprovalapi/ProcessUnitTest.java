@@ -52,15 +52,29 @@ public class ProcessUnitTest {
   }
 
   @Test
-  @Deployment(resources = "process.bpmn") // only required for process test coverage
+  @Deployment(resources = "loanprocess.bpmn") // only required for process test coverage
   public void testHappyPath() {
     // Drive the process by API and assert correct behavior by camunda-bpm-assert
-
+/*
     ProcessInstance processInstance = processEngine().getRuntimeService()
         .startProcessInstanceByKey(ProcessConstants.PROCESS_DEFINITION_KEY);
 
     assertThat(processInstance).isEnded();
+*/
+	  
+	  // Given we create a new process instance
+	    ProcessInstance processInstance = runtimeService().startProcessInstanceByKey("loanapprovalapi");
+	    // Then it should be active
+	    assertThat(processInstance).isActive();
+	    // And it should be the only instance
+	    assertThat(processInstanceQuery().count()).isEqualTo(1);
+	    // And there should exist just a single task within that process instance
+	    assertThat(task(processInstance)).isNotNull();
 
+	    // When we complete that task
+	    complete(task(processInstance));
+	    // Then the process instance should be ended
+	    assertThat(processInstance).isEnded();
   }
 
 }

@@ -11,6 +11,8 @@ import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 
+import com.boa.loanapprovalapi.delegates.LoggerDelegate;
+
 import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.*;
 import static org.junit.Assert.*;
 
@@ -33,7 +35,7 @@ public class InMemoryH2Test {
   }
 
   @Test
-  @Deployment(resources = "process.bpmn")
+  @Deployment(resources = "uploaddoc.bpmn")
   public void testHappyPath() {
     // Drive the process by API and assert correct behavior by camunda-bpm-assert
 
@@ -43,6 +45,7 @@ public class InMemoryH2Test {
         .startProcessInstanceByKey(ProcessConstants.PROCESS_DEFINITION_KEY);
 
     assertThat(processInstance).isEnded();
+    
   }
 
 }
